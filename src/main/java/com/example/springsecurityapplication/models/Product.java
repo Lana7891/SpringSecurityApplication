@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 public class Product {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,6 +55,13 @@ public class Product {
     private void init(){
         dateTime = LocalDateTime.now();
     }
+
+    @ManyToMany()
+    @JoinTable(name = "product_cart", joinColumns = @JoinColumn(name = "product_id"),inverseJoinColumns = @JoinColumn(name = "person_id"))
+    private List<Person> personList;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<Order> orderList;
 
     public Product(String title, String description, float price, String warehouse, String seller, Category category, LocalDateTime dateTime, List<Image> imageList) {
         this.title = title;
