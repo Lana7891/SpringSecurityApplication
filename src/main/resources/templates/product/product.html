@@ -6,6 +6,11 @@
 </head>
 <body>
 <h1>Главная страница магазина</h1>
+
+<form method="get" th:action="@{/authentication}">
+    <button type="submit">Вход в личный кабинет</button>
+</form>
+
 <h3>Cортировка, поиск, фильтрация</h3>
 <form th:method="POST" th:action="@{/product/search}">
     <fieldset>

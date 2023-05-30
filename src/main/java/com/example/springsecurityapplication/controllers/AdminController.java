@@ -2,13 +2,13 @@ package com.example.springsecurityapplication.controllers;
 
 import com.example.springsecurityapplication.models.Category;
 import com.example.springsecurityapplication.models.Image;
+import com.example.springsecurityapplication.models.Order;
 import com.example.springsecurityapplication.models.Product;
 import com.example.springsecurityapplication.repositories.CategoryRepository;
+import com.example.springsecurityapplication.services.OrderService;
 import com.example.springsecurityapplication.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,14 +23,16 @@ import java.util.UUID;
 public class AdminController {
 
     private final ProductService productService;
+   private final OrderService orderService;
 
     @Value("${upload.path}")
     private String uploadPath;
 
     private final CategoryRepository categoryRepository;
 
-    public AdminController(ProductService productService, CategoryRepository categoryRepository) {
+    public AdminController(ProductService productService, OrderService orderService, CategoryRepository categoryRepository) {
         this.productService = productService;
+        this.orderService = orderService;
         this.categoryRepository = categoryRepository;
     }
 
@@ -155,5 +157,26 @@ public class AdminController {
         }
         productService.updateProduct(id, product);
         return "redirect:/admin";
+    }
+    @GetMapping("/admin/order")
+    public String adminOrders(Model model)
+    {
+        model.addAttribute("orders", orderService.getAllOrders());
+        return "admin_order";
+    }
+    @GetMapping("admin/order/{id}")
+    public String editOrder(Model model, @PathVariable("id") int id){
+        model.addAttribute("orders", orderService.getOrderId(id));
+
+        return "editOrder";
+
+
+    }
+
+    @PostMapping("admin/order/{id}")
+    public String editOrder(@ModelAttribute("orders") @Valid Order order, @PathVariable("id") int id, Model model){
+
+        orderService.updateOrder(id, order);
+        return "redirect:/admin_order";
     }
 }
