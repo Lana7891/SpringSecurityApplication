@@ -56,7 +56,7 @@ public class MainController {
         if(role.equals("ROLE_ADMIN")){
             return "redirect:/admin";
         }
-//        System.out.println(personDetails.getPerson());
+//
 //        System.out.println("ID пользователя: " + personDetails.getPerson().getId());
 //        System.out.println("Логин пользователя: " + personDetails.getPerson().getLogin());
 //        System.out.println("Пароль пользователя: " + personDetails.getPerson().getPassword());
@@ -232,6 +232,11 @@ public class MainController {
         model.addAttribute("orders", orderList);
         return "/user/orders";
     }
-
+    @GetMapping("/admin/person")
+    public String adminPerson(Model model)
+    {
+        model.addAttribute("personAdmin", personService.getAllPerson());
+        return "admin_person";
+    }
 
 }

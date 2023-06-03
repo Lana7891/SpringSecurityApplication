@@ -14,6 +14,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
     private String number;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

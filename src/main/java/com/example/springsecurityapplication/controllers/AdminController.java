@@ -5,6 +5,7 @@ import com.example.springsecurityapplication.models.Image;
 import com.example.springsecurityapplication.models.Order;
 import com.example.springsecurityapplication.models.Product;
 import com.example.springsecurityapplication.repositories.CategoryRepository;
+import com.example.springsecurityapplication.repositories.OrderRepository;
 import com.example.springsecurityapplication.services.OrderService;
 import com.example.springsecurityapplication.services.ProductService;
 import jakarta.validation.Valid;
@@ -21,6 +22,7 @@ import java.util.UUID;
 
 @Controller
 public class AdminController {
+    private final OrderRepository orderRepository;
 
     private final ProductService productService;
    private final OrderService orderService;
@@ -30,7 +32,8 @@ public class AdminController {
 
     private final CategoryRepository categoryRepository;
 
-    public AdminController(ProductService productService, OrderService orderService, CategoryRepository categoryRepository) {
+    public AdminController(OrderRepository orderRepository, ProductService productService, OrderService orderService, CategoryRepository categoryRepository) {
+        this.orderRepository = orderRepository;
         this.productService = productService;
         this.orderService = orderService;
         this.categoryRepository = categoryRepository;
@@ -178,5 +181,13 @@ public class AdminController {
 
         orderService.updateOrder(id, order);
         return "redirect:/admin_order";
+    }
+    @PostMapping("/admin/order")
+    public String orderSearch(@RequestParam("search") String search, Model model){
+        model.addAttribute("orders", orderService.getAllOrders());
+        model.addAttribute("search_order", orderRepository.findByNumberContainingIgnoreCase(search));
+        model.addAttribute("value_search", search);
+        return "admin_order";
+
     }
 }

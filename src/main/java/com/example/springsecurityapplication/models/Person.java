@@ -68,6 +68,19 @@ public class Person {
         return id == person.id && Objects.equals(login, person.login) && Objects.equals(password, person.password);
     }
 
+    public Person(int id, String login, String password, String role, List<Product> productList, List<Order> orderList) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+        this.productList = productList;
+        this.orderList = orderList;
+    }
+
+    public Person() {
+
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, login, password);
@@ -79,5 +92,13 @@ public class Person {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 }

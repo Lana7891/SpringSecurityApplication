@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <title>Просмотр заказов</title>
+</head>
+<body>
+<h3>Список пользователей</h3>
+<div th:each="person : ${personAdmin}">
+  <h3 th:text="'id №' + ${person.getId()}"></h3>
+  <p th:text="'Логин: ' + ${person.getLogin()}"></p>
+  <p th:text="'Роль: ' + ${person.getRole()}"></p>
+  <p th:text="'Заказы: ' + ${person.getOrderList()}">
+  </p>
+</div>
+</body>
+</html>

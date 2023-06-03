@@ -8,6 +8,8 @@
 <h1>Личный кабинет администратора</h1>
 <a href="admin/order">Просмотр заказов пользователей</a>
 <hr>
+<a href="admin/person">Список пользователей</a>
+<hr>
 <form method="post" action="/logout">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     <button type="submit">Выйти из личного кабинета</button>
