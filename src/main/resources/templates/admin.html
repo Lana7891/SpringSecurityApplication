@@ -20,9 +20,9 @@
     <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
     <p th:text="'Описание: ' + ${product.getDescription()}"></p>
     <p th:text="'Цена: ' + ${product.getPrice()}"></p>
-    <p th:text="'Cклад: ' + ${product.getWarehouse()}"></p>
-    <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
-    <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+    <p th:text="'Автор произведения: ' + ${product.getWarehouse()}"></p>
+    <p th:text="'Издательство: ' + ${product.getSeller()}"></p>
+    <p th:text="'Жанр: ' + ${product.getCategory().getName()}"></p>
     <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактирование товара</a>
     <a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}">Удаление товара</a>
     <hr>

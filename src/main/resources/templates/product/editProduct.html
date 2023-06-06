@@ -22,12 +22,12 @@
   <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
   <br>
   <br>
-  <label for="warehouse">Введите cклад, на котором расположен товар: </label>
-  <input type="text" th:field="*{warehouse}" placeholder="Cклад" id="warehouse">
+  <label for="warehouse">Автор произведения: </label>
+  <input type="text" th:field="*{warehouse}" placeholder="Автор" id="warehouse">
   <div style="color: red" th:if="${#fields.hasErrors('warehouse')}" th:errors="*{warehouse}"></div>
   <br>
   <br>
-  <label for="category">Выберите категорию товара: </label>
+  <label for="category">Жанр: </label>
   <select name="category" th:field="*{category}" id="category">
     <div th:each="element : ${category}">
       <option th:text="${element.getName()}" th:value="${element.getId()}">
